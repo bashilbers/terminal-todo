@@ -1,6 +1,6 @@
 <?php
 
-include('/Users/stefwijnberg/StefW/scripts/cli.php');
+include('cli.php');
 include('Jira.php');
 include('Harvest.php');
 include('Wunderlist.php');
