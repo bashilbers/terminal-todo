@@ -1,0 +1,43 @@
+{
+	"workspaces": {
+		"Dayjob" : {
+			"days": [1,2,3,4,5],
+			"start": 17,
+			"end": 22,
+
+			"projects": [
+				{ "wunderlist_id": 1234, "name": "INBOX" },
+				{ "wunderlist_id": 1234, "name": "TASKS" },
+				{ "wunderlist_id": 1234, "name": "TICKETS"}
+			]
+		},
+		"Side projects" : {
+
+			"days": [1,2,3,4,5,6,7],
+			"start": 17,
+			"end": 22,
+			
+			"harvest": {
+				"domain": "subomdain",
+				"username": "",
+				"password": "",
+				"task_id": 5837559
+			},
+
+			"wunderlist": {
+				"id": "",
+				"secret": "",
+				"token": "",
+				"url": "",
+				"callback": ""
+			},
+
+			"projects": [
+				{ "wunderlist_id": 1234, "name": "INBOX" },
+				{ "wunderlist_id": 1234, "name": "REVIEW" },
+				{ "wunderlist_id": 1234, "name": "TASKS"},
+				{ "wunderlist_id": 1234, "name": "TICKETS"}
+			]
+		}
+	}
+}
