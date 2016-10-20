@@ -1,17 +1,24 @@
 <?php
 
-class Jira{
+namespace GTD;
 
-	private $config;
+class Jira
+{
+	protected $host;
 
-	public function __construct($config){
-		$this->config = $config;
+    protected $username;
+
+    protected $password;
+
+	public function __construct($host, $username, $password)
+    {
+		$this->host = $host;
+        $this->username = $username;
+        $this->password = $password;
 	}
 
-	
 	public function registerTime($comment, $key, $timeSpend)
 	{
-		
 		if($timeSpend < 60){
 			$timeSpend = 60;
 		}
@@ -44,7 +51,7 @@ class Jira{
 
 	function post($url, $data, $options = []){
 		
-		$url = $this->config->host . $url;
+		$url = $this->host . $url;
 		$json = json_encode($data);
 
 	
@@ -55,7 +62,7 @@ class Jira{
 			CURLOPT_HTTPHEADER => [
 				'Content-Type: application/json'
 			],
-			CURLOPT_USERPWD => $this->config->username . ":" . $this->config->password,
+			CURLOPT_USERPWD => $this->username . ":" . $this->password,
 			CURLOPT_TIMEOUT => 30,
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_USERAGENT => "StefW Jira Sync",
@@ -101,14 +108,14 @@ class Jira{
 	function get($url){
 
 	
-		$url = $this->config->host . $url;
+		$url = $this->host . $url;
 
 		$defaults = [
 			CURLOPT_HEADER => 0,
 			CURLOPT_HTTPHEADER => [
 				'Content-Type: application/json'
 			],
-			CURLOPT_USERPWD => $this->config->username . ":" . $this->config->password,
+			CURLOPT_USERPWD => $this->username . ":" . $this->password,
 			CURLOPT_TIMEOUT => 30,
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_USERAGENT => "StefW Jira Sync",

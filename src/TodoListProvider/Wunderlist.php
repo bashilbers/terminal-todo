@@ -1,33 +1,32 @@
 <?php
 
-class Wunderlist{
+namespace GTD\TodoListProvider;;
 
-	private $config;
-
-	public function __construct($config){
-		$this->config = $config;
-
+class Wunderlist
+{
+	public function __construct($token, $id)
+    {
 		$this->headers = [
-		    "X-Access-Token: " . $this->config->token,
-		    "X-Client-ID: " . $this->config->id,
+		    "X-Access-Token: " . $token,
+		    "X-Client-ID: " . $id,
 		    'Content-Type: application/json'
 		];
-
 	}
 
-	public function done($todo){
+	public function done($todo)
+    {
 		$payload = json_encode([
-				'revision' => $todo->revision,
-				'completed' => true
-			]);
-		curl_request('PATCH', 'a.wunderlist.com/api/v1/tasks/' . $todo->id, $this->headers,[
+            'revision' => $todo->revision,
+            'completed' => true
+        ]);
+
+        curl_request('PATCH', 'a.wunderlist.com/api/v1/tasks/' . $todo->id, $this->headers,[
 			CURLOPT_POSTFIELDS => $payload
 		]);
-
 	}
 
-	public function addNote($taskId, $content){
-		
+	public function addNote($taskId, $content)
+    {
 		$payload = json_encode([
 			'task_id' => $taskId,
 			'content' => $content
@@ -53,7 +52,6 @@ class Wunderlist{
 
 	public function createTodo($todo)
 	{
-
 		$newTodo = [];
 		$params = ['list_id','title','due_date','recurrence_type'];
 		foreach($params as $p){
@@ -72,16 +70,19 @@ class Wunderlist{
 		return json_decode($result);
 	}
 
-	private function get($url){
+	private function get($url)
+    {
 		$data = curl_request('GET', $url,  $this->headers);
 		return json_decode($data);
 	}
 
-	public function getListTodos($id){
+	public function getListTodos($id)
+    {
 		return $this->get('a.wunderlist.com/api/v1/tasks?list_id=' . $id);
 	}
 
-	public function getNotes($id){
+	public function getNotes($id)
+    {
 		return $this->get('a.wunderlist.com/api/v1/notes?task_id=' . $id);
 	}
 
@@ -90,11 +91,9 @@ class Wunderlist{
 		return $this->get('a.wunderlist.com/api/v1/tasks/' . $id);
 	}
 
-	public function getLists(){
+	public function getLists()
+    {
 		$url = 'a.wunderlist.com/api/v1/lists';
 		return $this->get($url);
 	}
-
-	
-
 }

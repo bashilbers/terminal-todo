@@ -1,10 +1,13 @@
 <?php
 
-class Harvest{
+namespace GTD;
 
+class Harvest
+{
 	private $config;
 
-	public function __construct($config){
+	public function __construct($config)
+    {
 		$this->config = $config;
 		$this->config->auth = base64_encode($this->config->username . ':' . $this->config->password);
 	}
