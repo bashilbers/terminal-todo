@@ -1,6 +1,8 @@
 export ROOT_DIR=${PWD}
 
-.PHONY: build configure
+all : build configure
+
+.PHONY: all
 
 build:
 	docker run -it --rm -v ${ROOT_DIR}:/src -v ~/.composer:/root/.composer bashilbers/composer update --ignore-platform-reqs
